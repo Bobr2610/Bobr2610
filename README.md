@@ -20,6 +20,4 @@ Learning **C#** and **C++**. Interested in **AI**.
 
 <img src="https://raw.githubusercontent.com/Bobr2610/Repositories_count/main/counter.png" alt="Repositories"/>
 
-[![Repositories](https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/Bobr2610&label=Repositories&query=public_repos&color=00d4ff&logo=github&style=for-the-badge)](https://github.com/Bobr2610?tab=repositories)
-
 </div>
