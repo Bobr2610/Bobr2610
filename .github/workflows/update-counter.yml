@@ -1,0 +1,69 @@
+name: Update Visitor Counter
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - counter.png
+      - theme/
+      - README.md
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get theme from Views Counter repo
+        run: |
+          if [ ! -f theme/0.png ]; then
+            git clone --depth 1 https://github.com/Bobr2610/Views_Counter_with_custom_images.git /tmp/vc
+            cp -r /tmp/vc/theme ./theme
+          fi
+
+      - name: Get count
+        id: count
+        env:
+          TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
+        run: |
+          if [ -n "$TOKEN" ]; then
+            RESPONSE=$(curl -sS -H "Authorization: token $TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/${{ github.repository }}/traffic/views" || echo '{}')
+            if echo "$RESPONSE" | jq -e 'has("count")' > /dev/null 2>&1; then
+              VIEWS=$(echo "$RESPONSE" | jq -r '.count')
+            else
+              VIEWS=$(jq -r '.count // 0' counter.json 2>/dev/null || echo "0")
+            fi
+          else
+            VIEWS=$(jq -r '.count // 0' counter.json 2>/dev/null || echo "0")
+          fi
+          echo "views=$VIEWS" >> $GITHUB_OUTPUT
+
+      - name: Generate counter from beaver theme
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends imagemagick
+          n=${{ steps.count.outputs.views }}
+          digits=$(printf "%07d" $n)
+          files=$(echo $digits | sed 's/\(.\)/theme\/\1.png /g')
+          convert $files -resize 80x80 +append counter.png
+
+      - name: Update README cache-bust
+        id: cachebust
+        run: |
+          TS=$(date +%s)
+          echo "ts=$TS" >> $GITHUB_OUTPUT
+          sed -i -E "s|(raw\.githubusercontent\.com/${{ github.repository }}/main/counter\.png)(\?v=[0-9]+)?|\1?v=$TS|g" README.md
+
+      - name: Commit and Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add counter.png README.md
+          git diff --staged --quiet || git commit -m "Update visitor count: ${{ steps.count.outputs.views }}"
+          git push
