@@ -1,19 +1,16 @@
 <div align="center">
 
 # 👋 Hi, I'm Michael
----
 
 ### About Me
 
 Learning **C#** and **C++**. Interested in **AI**.
 
----
 
 ### GitHub
 
-<img src="https://streak-stats.demolab.com/?user=Bobr2610&theme=radical&hide_border=true&background=0D1117&ring=00d4ff&fire=ff6b6b&currStreakLabel=00d4ff" width="400"/>
+<img src="https://streak-stats.demolab.com/?user=Bobr2610&theme=github-light&hide_border=true&background=ffffff" width="400"/>
 
----
 
 ### Repositories count
 
