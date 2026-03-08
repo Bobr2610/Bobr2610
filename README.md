@@ -1,10 +1,6 @@
 <div align="center">
 
 # 👋 Hi, I'm Michael
-
-[![GitHub](https://img.shields.io/badge/GitHub-Bobr2610-181717?style=for-the-badge&logo=github)](https://github.com/Bobr2610)
-[![Profile](https://img.shields.io/badge/Profile-README-00d4ff?style=for-the-badge)](https://github.com/Bobr2610)
-
 ---
 
 ### About Me
@@ -20,24 +16,9 @@ Learning **C#** and **C++**. Interested in **AI**.
 
 ---
 
-### Contribution Graph
+### Repositories count
 
-<img src="https://github-readme-activity-graph.vercel.app/graph?username=Bobr2610&theme=react-dark&hide_border=true&bg_color=0D1117&color=00d4ff&line=ff6b6b&point=00d4ff" width="100%"/>
-
----
-
-### Top Languages
-
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Bobr2610&layout=compact&theme=radical&hide_border=true&bg_color=0D1117&title_color=00d4ff" width="400"/>
-
----
-
-### Contributionы
-
-![Snake animation](https://raw.githubusercontent.com/Bobr2610/Bobr2610/output/github-contribution-grid-snake.svg)
-
----
-
+<img src="https://raw.githubusercontent.com/Bobr2610/Repositories_count/main/counter.png" alt="Repositories"/>
 
 [![Repositories](https://img.shields.io/badge/dynamic/json?url=https://api.github.com/users/Bobr2610&label=Repositories&query=public_repos&color=00d4ff&logo=github&style=for-the-badge)](https://github.com/Bobr2610?tab=repositories)
 

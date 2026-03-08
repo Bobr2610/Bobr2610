@@ -1,4 +1,4 @@
-name: Update Visitor Counter
+name: Update Repository Counter
 
 on:
   push:
@@ -26,29 +26,17 @@ jobs:
             cp -r /tmp/vc/theme ./theme
           fi
 
-      - name: Get count
+      - name: Get repository count
         id: count
-        env:
-          TOKEN: ${{ secrets.TRAFFIC_TOKEN }}
         run: |
-          if [ -n "$TOKEN" ]; then
-            RESPONSE=$(curl -sS -H "Authorization: token $TOKEN" \
-              -H "Accept: application/vnd.github+json" \
-              "https://api.github.com/repos/${{ github.repository }}/traffic/views" || echo '{}')
-            if echo "$RESPONSE" | jq -e 'has("count")' > /dev/null 2>&1; then
-              VIEWS=$(echo "$RESPONSE" | jq -r '.count')
-            else
-              VIEWS=$(jq -r '.count // 0' counter.json 2>/dev/null || echo "0")
-            fi
-          else
-            VIEWS=$(jq -r '.count // 0' counter.json 2>/dev/null || echo "0")
-          fi
-          echo "views=$VIEWS" >> $GITHUB_OUTPUT
+          RESPONSE=$(curl -sS "https://api.github.com/users/Bobr2610")
+          REPOS=$(echo "$RESPONSE" | jq -r '.public_repos // 0')
+          echo "repos=$REPOS" >> $GITHUB_OUTPUT
 
       - name: Generate counter from beaver theme
         run: |
           sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends imagemagick
-          n=${{ steps.count.outputs.views }}
+          n=${{ steps.count.outputs.repos }}
           digits=$(printf "%07d" $n)
           files=$(echo $digits | sed 's/\(.\)/theme\/\1.png /g')
           convert $files -resize 80x80 +append counter.png
@@ -65,5 +53,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add counter.png README.md
-          git diff --staged --quiet || git commit -m "Update visitor count: ${{ steps.count.outputs.views }}"
+          git diff --staged --quiet || git commit -m "Update repository count: ${{ steps.count.outputs.repos }}"
           git push
