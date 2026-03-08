@@ -5,6 +5,7 @@
 ### About Me
 
 Learning **C#** and **C++**. Interested in **AI**.
+Know  **C** and **Python**
 
 
 ### GitHub
