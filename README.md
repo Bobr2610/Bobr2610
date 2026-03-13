@@ -10,7 +10,7 @@ Know  **C** and **Python**
 
 ### GitHub
 
-<img src="https://streak-stats.demolab.com/?user=Bobr2610&theme=github-light&hide_border=true&background=ffffff" width="400"/>
+[<img src="https://raw.githubusercontent.com/Bobr2610/Custom_Stas/main/counter.png" alt="GitHub Streak Stats" width="400"/>](https://github.com/Bobr2610/Custom_Stas)
 
 
 ### Repositories count
